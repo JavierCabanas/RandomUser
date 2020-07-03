@@ -47,8 +47,11 @@ val detektAll by tasks.registering(io.gitlab.arturbosch.detekt.Detekt::class) {
     exclude("**/buildSrc/**")
     exclude("**/test/**/*.kt")
     reports {
-        xml.enabled = false
-        html.enabled = false
-        txt.enabled = false
+        xml {
+            enabled = true
+            destination = file("build/reports/detekt.xml")
+        }
+        html.enabled = true
+        txt.enabled = true
     }
 }
