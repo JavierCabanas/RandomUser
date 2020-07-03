@@ -1,3 +1,3 @@
 include(":core")
-include (":app")
+include(":app")
 rootProject.name = "RandomUser"
