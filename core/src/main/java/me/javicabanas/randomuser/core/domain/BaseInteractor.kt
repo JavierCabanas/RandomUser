@@ -1,7 +1,7 @@
-package me.javicabanas.core.domain
+package me.javicabanas.randomuser.core.domain
 
-import me.javicabanas.core.failure.Failure
-import me.javicabanas.core.functional.Either
+import me.javicabanas.randomuser.core.failure.Failure
+import me.javicabanas.randomuser.core.functional.Either
 
 abstract class BaseInteractor<in Request, out Response> where Response : Any {
     protected abstract suspend fun run(request: Request): Either<Failure, Response>

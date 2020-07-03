@@ -1,4 +1,4 @@
-package me.javicabanas.core.failure
+package me.javicabanas.randomuser.core.failure
 
 sealed class Failure(open val reason: String, open val exception: Exception? = null) {
     data class ElementNotFound(
