@@ -3,7 +3,7 @@ plugins {
     kotlin("android")
     kotlin("android.extensions")
 }
-
+@Suppress("MagicNumber")
 android {
     compileSdkVersion(29)
     buildToolsVersion("29.0.3")
