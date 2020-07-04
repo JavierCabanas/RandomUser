@@ -4,7 +4,6 @@ import me.javicabanas.randomuser.core.failure.Failure
 import me.javicabanas.randomuser.core.functional.contains
 import me.javicabanas.randomuser.core.model.User
 import me.javicabanas.randomuser.network.client.ApiClientBuilder
-import me.javicabanas.randomuser.network.client.HttpClient
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.After
@@ -15,7 +14,6 @@ import org.junit.Test
 class UserApiClientTest {
     private lateinit var mockWebServer: MockWebServer
     private lateinit var userApiClient: UserApiClient
-    private val httpClient: HttpClient = HttpClient()
 
     @Before
     @Throws
@@ -23,8 +21,7 @@ class UserApiClientTest {
         mockWebServer = MockWebServer()
         mockWebServer.start()
         val userService = ApiClientBuilder(
-            mockWebServer.url("/").toString(),
-            httpClient
+            mockWebServer.url("/").toString()
         ).buildEndpoint(UserService::class)
         userApiClient = UserApiClient(userService)
     }
