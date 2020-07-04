@@ -1,3 +1,4 @@
+include(":feature:usercatalog:domain")
 include(":feature:usercatalog")
 include(":network")
 include(":core")
