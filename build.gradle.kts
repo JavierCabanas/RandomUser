@@ -1,6 +1,4 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
-    val kotlin_version by extra("1.3.72")
     repositories {
         google()
         jcenter()
@@ -42,11 +40,8 @@ val detektAll by tasks.registering(io.gitlab.arturbosch.detekt.Detekt::class) {
     exclude("**/buildSrc/**")
     exclude("**/test/**/*.kt")
     reports {
-        xml {
-            enabled = true
-            destination = file("build/reports/detekt.xml")
-        }
-        html.enabled = true
-        txt.enabled = true
+        xml.enabled = false
+        html.enabled = false
+        txt.enabled = false
     }
 }
