@@ -33,6 +33,15 @@ jobs:
       - store_artifacts:
           path: network/build/reports
           destination: reports
+      - store_artifacts:
+          path: feature/usercatalog/build/test-results
+          destination: reports
+      - store_artifacts:
+          path: feature/usercatalog/domain/build/test-results
+          destination: reports
+      - store_artifacts:
+          path: feature/usercatalog/data/build/test-results
+          destination: reports
 
       # Store tests results
       - store_test_results:
@@ -41,5 +50,10 @@ jobs:
           path: core/build/test-results
       - store_test_results:
           path: network/build/test-results
-
+      - store_test_results:
+          path: feature/usercatalog/build/test-results
+      - store_test_results:
+          path: feature/usercatalog/domain/build/test-results
+      - store_test_results:
+          path: feature/usercatalog/data/build/test-results
 
