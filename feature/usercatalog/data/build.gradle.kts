@@ -1,3 +1,5 @@
+import libraries.coroutines.android
+
 plugins {
     id("com.android.library")
     kotlin("android")
@@ -6,10 +8,10 @@ plugins {
 }
 
 android {
-    compileSdkVersion(Versions.compileSdk)
     buildToolsVersion(Versions.buildTools)
 
     defaultConfig {
+        compileSdkVersion(Versions.compileSdk)
         minSdkVersion(Versions.minSdk)
         targetSdkVersion(Versions.targetSdk)
         versionCode = Versions.versionCode
@@ -32,15 +34,16 @@ android {
 
 dependencies {
     implementation(project(":core"))
+    implementation(project(":feature:usercatalog:domain"))
+    implementation(project(":network"))
     implementation(libraries.kotlin)
     implementation(libraries.androidX.appcompat)
     implementation(libraries.androidX.core)
-    implementation(libraries.network.okhttp)
-    implementation(libraries.network.logginIntercepor)
     implementation(libraries.network.retrofit)
     implementation(libraries.network.retrofitConverter)
     implementation(libraries.serialization)
 
     testImplementation(test.jUnit)
+    testImplementation(libraries.network.mockWebServer)
     androidTestImplementation(androidTest.espresso)
 }

@@ -2,7 +2,6 @@ plugins {
     id("com.android.library")
     kotlin("android")
     kotlin("android.extensions")
-    kotlin("plugin.serialization") version Versions.kotlin
 }
 
 android {
@@ -35,11 +34,6 @@ dependencies {
     implementation(libraries.kotlin)
     implementation(libraries.androidX.appcompat)
     implementation(libraries.androidX.core)
-    implementation(libraries.network.okhttp)
-    implementation(libraries.network.logginIntercepor)
-    implementation(libraries.network.retrofit)
-    implementation(libraries.network.retrofitConverter)
-    implementation(libraries.serialization)
 
     testImplementation(test.jUnit)
     androidTestImplementation(androidTest.espresso)
