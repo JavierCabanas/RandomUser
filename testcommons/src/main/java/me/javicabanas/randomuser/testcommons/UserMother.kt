@@ -2,6 +2,7 @@ package me.javicabanas.randomuser.testcommons
 
 import me.javicabanas.randomuser.core.model.User
 
+@Suppress("MagicNumber")
 object UserMother {
     val users = (1..10).map {
         User(
@@ -17,4 +18,3 @@ object UserMother {
         )
     }
 }
-

@@ -6,11 +6,11 @@ import okhttp3.MediaType.Companion.toMediaType
 import retrofit2.Retrofit
 import kotlin.reflect.KClass
 
-class ApiClientBuilder(baseUrl: String, httpClient: HttpClient) {
+class ApiClientBuilder(baseUrl: String) {
     private val contentType = "application/json".toMediaType()
     private val retrofit: Retrofit = Retrofit.Builder()
         .baseUrl(baseUrl)
-        .client(httpClient.okClient)
+        .client(HttpClient.okClient)
         .addConverterFactory(Json.asConverterFactory(contentType))
         .build()
 

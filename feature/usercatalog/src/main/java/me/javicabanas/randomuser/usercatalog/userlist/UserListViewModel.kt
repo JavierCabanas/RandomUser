@@ -1,5 +1,6 @@
 package me.javicabanas.randomuser.usercatalog.userlist
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -7,7 +8,8 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import me.javicabanas.randomuser.usercatalog.domain.GetAllUsers
 
-class UserListViewModel(private val getAllUsers: GetAllUsers) : ViewModel() {
+class UserListViewModel @ViewModelInject constructor(private val getAllUsers: GetAllUsers) :
+    ViewModel() {
     private val _viewState = MutableLiveData<UserListViewState>()
         .apply {
             value = UserListViewState.Empty
