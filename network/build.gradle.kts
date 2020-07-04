@@ -5,6 +5,7 @@ plugins {
     kotlin("plugin.serialization") version Versions.kotlin
 }
 
+@Suppress("MagicNumber")
 android {
     compileSdkVersion(29)
     buildToolsVersion("29.0.3")
