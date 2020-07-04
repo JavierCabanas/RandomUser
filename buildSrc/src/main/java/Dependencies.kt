@@ -33,6 +33,7 @@ object libraries {
 
 object test {
     const val jUnit = "junit:junit:4.12"
+    const val mockk = "io.mockk:mockk:1.10.0"
 }
 
 object androidTest {
