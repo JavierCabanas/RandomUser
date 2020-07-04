@@ -10,11 +10,11 @@ import me.javicabanas.randomuser.usercatalog.domain.GetAllUsers
 class UserListViewModel(private val getAllUsers: GetAllUsers) : ViewModel() {
     private val _viewState = MutableLiveData<UserListViewState>()
         .apply {
-            value = UserListViewState.empty
+            value = UserListViewState.Empty
         }
     val viewState: LiveData<UserListViewState> = _viewState
     fun loadUsers() {
-        _viewState.value = UserListViewState.loading
+        _viewState.value = UserListViewState.Loading
         viewModelScope.launch {
             _viewState.value = getAllUsers(Unit)
                 .map { users ->
@@ -22,10 +22,10 @@ class UserListViewModel(private val getAllUsers: GetAllUsers) : ViewModel() {
                 }
                 .fold(
                     ifLeft = {
-                        UserListViewState.empty
+                        UserListViewState.Empty
                     },
                     ifRight = {
-                        UserListViewState.withData(it)
+                        UserListViewState.WithData(it)
                     }
                 )
         }
