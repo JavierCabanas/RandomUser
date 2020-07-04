@@ -19,14 +19,3 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
-
-#### Serialization ####
--keepattributes *Annotation*, InnerClasses
--dontnote kotlinx.serialization.SerializationKt
--keep,includedescriptorclasses class me.javicabanas.randomuser.**$$serializer { *; }
--keepclassmembers class me.javicabanas.randomuser.** {
-    *** Companion;
-}
--keepclasseswithmembers class me.javicabanas.randomuser.** {
-    kotlinx.serialization.KSerializer serializer(...);
-}

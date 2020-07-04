@@ -1,4 +1,4 @@
-package me.javicabanas.core.functional
+package me.javicabanas.randomuser.core.functional
 
 /**
  * Taken from https://github.com/arrow-kt/arrow with some little modifications
@@ -50,7 +50,11 @@ sealed class Either<out A, out B> {
      * Right("right").swap() // Result: Left("right")
      * ```
      */
-    fun swap(): Either<B, A> = fold({ Right(it) }, { Left(it) })
+    fun swap(): Either<B, A> = fold({
+        Right(
+            it
+        )
+    }, { Left(it) })
 
     /**
      * The given function is applied if this is a `Right`.
@@ -63,7 +67,11 @@ sealed class Either<out A, out B> {
      */
     @Suppress("UNCHECKED_CAST")
     inline fun <C> map(f: (B) -> C): Either<A, C> =
-        fold({ Left(it) }, { Right(f(it)) })
+        fold({ Left(it) }, {
+            Right(
+                f(it)
+            )
+        })
 
     /**
      * The given function is applied if this is a `Left`.
@@ -75,13 +83,25 @@ sealed class Either<out A, out B> {
      * ```
      */
     inline fun <C> mapLeft(f: (A) -> C): Either<C, B> =
-        fold({ Left(f(it)) }, { Right(it) })
+        fold({ Left(f(it)) }, {
+            Right(
+                it
+            )
+        })
 
     /**
      * Map over Left and Right of this Either
      */
     inline fun <C, D> bimap(leftOperation: (A) -> C, rightOperation: (B) -> D): Either<C, D> =
-        fold({ Left(leftOperation(it)) }, { Right(rightOperation(it)) })
+        fold({
+            Left(
+                leftOperation(it)
+            )
+        }, {
+            Right(
+                rightOperation(it)
+            )
+        })
 
     /**
      * Returns `false` if [Left] or returns the result of the application of
@@ -177,7 +197,8 @@ fun <B> Either<*, B>.orNull(): B? = getOrElse { null }
 /**
  * Wraps the caller into a Right side of an Either
  */
-fun <T> T.toRight() = Either.Right(this)
+fun <T> T.toRight() =
+    Either.Right(this)
 
 /**
  * Wraps the caller into a Left side of an Either

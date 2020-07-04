@@ -1,4 +1,4 @@
-package me.javicabanas.core.failure
+package me.javicabanas.randomuser.core.failure
 
 sealed class Failure(open val reason: String, open val exception: Exception? = null) {
     data class ElementNotFound(
@@ -22,5 +22,8 @@ sealed class Failure(open val reason: String, open val exception: Exception? = n
     ) : Failure(reason, exception)
 
     data class Unknown(override val reason: String, override val exception: Exception? = null) :
+        Failure(reason, exception)
+
+    data class Network(override val reason: String, override val exception: Exception? = null) :
         Failure(reason, exception)
 }
