@@ -48,6 +48,8 @@ dependencies {
 
     implementation(libraries.di.daggerHilt)
     kapt(libraries.di.daggerHiltCompiler)
+    implementation(libraries.di.lifecycleHilt)
+    kapt(libraries.di.lifecycleHiltCompiler)
 
     testImplementation(test.jUnit)
 
