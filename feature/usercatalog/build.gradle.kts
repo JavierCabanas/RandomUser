@@ -46,6 +46,8 @@ dependencies {
     implementation(libraries.androidX.viewModelScope)
     implementation(libraries.di.daggerHilt)
     kapt(libraries.di.daggerHiltCompiler)
+    implementation(libraries.di.lifecycleHilt)
+    kapt(libraries.di.lifecycleHiltCompiler)
 
     testImplementation(project(":testcommons"))
     testImplementation(test.jUnit)
