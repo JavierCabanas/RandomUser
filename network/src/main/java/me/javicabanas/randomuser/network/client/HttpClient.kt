@@ -10,7 +10,7 @@ private const val WEBSOCKET_PING_INTERVAL_SECONDS: Long = 10
 private const val DEFAULT_READ_TIMEOUT_SECONDS: Long = 45
 private const val NO_TIMEOUT_SECONDS: Long = 0
 
-class HttpClient {
+internal object HttpClient {
     private val logInterceptor by lazy {
         HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
     }
