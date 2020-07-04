@@ -13,21 +13,21 @@ interface ApiClient {
         } catch (exception: IOException) {
             Either.Left(
                 buildNetworkFailure(
-                    reason = exception.localizedMessage,
+                    reason = exception.localizedMessage ?: "",
                     exception = exception
                 )
             )
         } catch (exception: SerializationException) {
             Either.Left(
                 buildNetworkFailure(
-                    reason = exception.localizedMessage,
+                    reason = exception.localizedMessage ?: "",
                     exception = exception
                 )
             )
         } catch (exception: JsonException) {
             Either.Left(
                 buildNetworkFailure(
-                    reason = exception.localizedMessage,
+                    reason = exception.localizedMessage ?: "",
                     exception = exception
                 )
             )
