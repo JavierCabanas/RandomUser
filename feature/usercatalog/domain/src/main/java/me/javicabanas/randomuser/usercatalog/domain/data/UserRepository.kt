@@ -5,10 +5,10 @@ import me.javicabanas.randomuser.core.functional.Either
 import me.javicabanas.randomuser.core.functional.toRight
 import me.javicabanas.randomuser.core.model.User
 
-class UserRepository(private val network: NetworkDataSource) {
+class UserRepository(private val userNetwork: UserNetworkDataSource) {
     fun getAllUsers(): Either<Failure, List<User>> = emptyList<User>().toRight()
 }
 
-interface NetworkDataSource {
+interface UserNetworkDataSource {
     fun getAllUsers(): Either<Failure, List<User>>
 }

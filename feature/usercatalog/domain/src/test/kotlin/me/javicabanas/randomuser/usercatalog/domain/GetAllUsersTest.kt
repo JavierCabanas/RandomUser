@@ -4,6 +4,7 @@ import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
 import me.javicabanas.randomuser.core.failure.Failure
+import me.javicabanas.randomuser.core.functional.contains
 import me.javicabanas.randomuser.core.functional.toLeft
 import me.javicabanas.randomuser.core.functional.toRight
 import me.javicabanas.randomuser.core.model.User
@@ -18,7 +19,7 @@ class GetAllUsersTest {
     fun `should return list given by repository`() {
         val expectedUsers = givenAlistWithUsers()
         val result = runBlocking { getAllUsers(Unit) }
-        assert(result.exists { it == expectedUsers })
+        assert(result.contains(expectedUsers))
     }
 
     private fun givenAlistWithUsers(): List<User> {
@@ -43,7 +44,7 @@ class GetAllUsersTest {
     fun `should propagate error from repository`() {
         val expectedFailure = givenAFailureResponse()
         val result = runBlocking { getAllUsers(Unit) }
-        assert(result.swap().exists { it == expectedFailure })
+        assert(result.swap().contains(expectedFailure))
     }
 
     private fun givenAFailureResponse(): Failure {
