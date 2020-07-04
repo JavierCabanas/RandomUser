@@ -19,7 +19,7 @@ import org.junit.Test
 import org.junit.rules.TestRule
 
 @ExperimentalCoroutinesApi
-class UserListViewModelTest() {
+class UserListViewModelTest {
     @get:Rule
     val coroutinesRule: TestRule = CoroutinesTestRule()
 

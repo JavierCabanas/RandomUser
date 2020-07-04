@@ -7,6 +7,7 @@ dependencies {
     implementation(libraries.kotlin)
     implementation(libraries.coroutines.core)
 
+    testImplementation(project(":testcommons"))
     testImplementation(test.jUnit)
     testImplementation(test.mockk)
 }
