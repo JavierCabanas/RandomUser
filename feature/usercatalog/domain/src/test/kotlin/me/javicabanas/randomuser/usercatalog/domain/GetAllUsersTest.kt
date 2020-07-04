@@ -53,4 +53,15 @@ class GetAllUsersTest {
         return failure
     }
 
+    @Test
+    fun `should return failure when list is empty`() {
+        givenAnEmptyList()
+        val result = runBlocking { getAllUsers(Unit) }
+        assert(result.swap().exists { it is Failure.ElementNotFound })
+    }
+
+    private fun givenAnEmptyList() {
+        coEvery { userRepository.getAllUsers() } returns emptyList<User>().toRight()
+    }
+
 }
