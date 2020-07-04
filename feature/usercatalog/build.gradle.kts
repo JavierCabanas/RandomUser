@@ -31,9 +31,12 @@ android {
 
 dependencies {
     implementation(project(":core"))
+    implementation(project(":feature:usercatalog:domain"))
     implementation(libraries.kotlin)
     implementation(libraries.androidX.appcompat)
     implementation(libraries.androidX.core)
+    implementation(libraries.androidX.viewModel)
+    implementation(libraries.androidX.viewModelScope)
 
     testImplementation(test.jUnit)
     androidTestImplementation(androidTest.espresso)
