@@ -1,7 +1,9 @@
 plugins {
     id("com.android.library")
+    id("dagger.hilt.android.plugin")
     kotlin("android")
     kotlin("android.extensions")
+    kotlin("kapt")
 }
 
 android {
@@ -27,6 +29,11 @@ android {
             proguardFiles("proguard-rules.pro")
         }
     }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
@@ -37,6 +44,8 @@ dependencies {
     implementation(libraries.androidX.core)
     implementation(libraries.androidX.viewModel)
     implementation(libraries.androidX.viewModelScope)
+    implementation(libraries.di.daggerHilt)
+    kapt(libraries.di.daggerHiltCompiler)
 
     testImplementation(project(":testcommons"))
     testImplementation(test.jUnit)

@@ -2,9 +2,11 @@ import libraries.coroutines.android
 
 plugins {
     id("com.android.library")
+//    id("dagger.hilt.android.plugin")
     kotlin("android")
     kotlin("android.extensions")
     kotlin("plugin.serialization") version Versions.kotlin
+    kotlin("kapt")
 }
 
 android {
@@ -30,6 +32,11 @@ android {
             proguardFiles("proguard-rules.pro")
         }
     }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
@@ -42,6 +49,8 @@ dependencies {
     implementation(libraries.network.retrofit)
     implementation(libraries.network.retrofitConverter)
     implementation(libraries.serialization)
+    implementation(libraries.di.daggerHilt)
+    kapt(libraries.di.daggerHiltCompiler)
 
     testImplementation(test.jUnit)
     testImplementation(libraries.network.mockWebServer)
