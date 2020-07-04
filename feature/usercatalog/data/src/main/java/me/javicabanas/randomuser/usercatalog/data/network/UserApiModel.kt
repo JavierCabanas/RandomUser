@@ -14,7 +14,8 @@ data class UserApiModel(
     val background: String,
     val gender: String,
     val email: String,
-    val description: String
+    val description: String,
+    @SerialName("ip_address") val ipAddress: String
 )
 
 internal fun UserApiModel.toDomain(): User =
