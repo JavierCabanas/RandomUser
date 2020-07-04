@@ -11,13 +11,17 @@ object libraries {
         const val core = "androidx.core:core-ktx:1.3.0"
         const val lifecycleExtensions = "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
         const val lifecycleCompiler = "androidx.lifecycle:lifecycle-compiler:$lifecycleVersion"
-        const val ViewModel = "androidx.lifecycle:lifecycle-viewmodel:$lifecycleVersion"
+        const val viewModel = "androidx.lifecycle:lifecycle-viewmodel:$lifecycleVersion"
+        const val viewModelScope = "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
+
     }
 
     object coroutines {
         private const val coroutinesVersion = "1.3.3"
         const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
         const val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
+        const val coroutinesTest =
+            "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
     }
 
     object network {
@@ -34,6 +38,7 @@ object libraries {
 object test {
     const val jUnit = "junit:junit:4.12"
     const val mockk = "io.mockk:mockk:1.10.0"
+    const val archCoreTesting= "android.arch.core:core-testing:2.1.0"
 }
 
 object androidTest {

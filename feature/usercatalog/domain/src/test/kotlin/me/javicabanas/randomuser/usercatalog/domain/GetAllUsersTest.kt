@@ -8,6 +8,7 @@ import me.javicabanas.randomuser.core.functional.contains
 import me.javicabanas.randomuser.core.functional.toLeft
 import me.javicabanas.randomuser.core.functional.toRight
 import me.javicabanas.randomuser.core.model.User
+import me.javicabanas.randomuser.testcommons.UserMother
 import me.javicabanas.randomuser.usercatalog.domain.data.UserRepository
 import org.junit.Test
 
@@ -23,19 +24,7 @@ class GetAllUsersTest {
     }
 
     private fun givenAlistWithUsers(): List<User> {
-        val users = (1..10).map {
-            User(
-                id = "id-$it",
-                avatar = "avatar-$it",
-                background = "background-$it",
-                city = "city-$it",
-                firstName = "firstName-$it",
-                lastName = "lastName-$it",
-                gender = "gender-$it",
-                email = "email-$it",
-                description = "description-$it"
-            )
-        }
+        val users = UserMother.users
         coEvery { userRepository.getAllUsers() } returns users.toRight()
         return users
     }

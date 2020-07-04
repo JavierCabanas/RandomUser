@@ -5,9 +5,10 @@ plugins {
 dependencies {
     implementation(project(":core"))
     implementation(libraries.kotlin)
-    implementation(libraries.coroutines.core)
+//    implementation(libraries.coroutines.core)
+    implementation(libraries.coroutines.coroutinesTest)
+    implementation(test.jUnit)
 
-    testImplementation(project(":testcommons"))
     testImplementation(test.jUnit)
     testImplementation(test.mockk)
 }
