@@ -38,6 +38,7 @@ object libraries {
 object test {
     const val jUnit = "junit:junit:4.12"
     const val mockk = "io.mockk:mockk:1.10.0"
+    const val archCoreTesting= "android.arch.core:core-testing:2.1.0"
 }
 
 object androidTest {

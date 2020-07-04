@@ -38,6 +38,10 @@ dependencies {
     implementation(libraries.androidX.viewModel)
     implementation(libraries.androidX.viewModelScope)
 
+    testImplementation(project(":testcommons"))
     testImplementation(test.jUnit)
+    testImplementation(test.archCoreTesting)
+    testImplementation(test.mockk)
+    implementation(libraries.coroutines.coroutinesTest)
     androidTestImplementation(androidTest.espresso)
 }
