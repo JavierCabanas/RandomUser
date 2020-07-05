@@ -14,6 +14,7 @@ import org.junit.runner.RunWith
 
 @LargeTest
 @RunWith(AndroidJUnit4::class)
+@Suppress("UnnecessaryAbstractClass")
 abstract class AcceptanceTest<T : Activity>(clazz: Class<T>) {
 
     @get:Rule
