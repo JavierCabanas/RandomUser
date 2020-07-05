@@ -51,6 +51,7 @@ dependencies {
     kapt(libraries.di.daggerHiltCompiler)
 
     testImplementation(test.jUnit)
+    testImplementation(project(":testcommons"))
     testImplementation(libraries.network.mockWebServer)
     androidTestImplementation(androidTest.espressoCore)
 }

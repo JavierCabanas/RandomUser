@@ -55,8 +55,6 @@ dependencies {
     kapt(libraries.di.lifecycleHiltCompiler)
     implementation(androidTest.espressoIntents)
 
-
-
     testImplementation(test.jUnit)
     testImplementation(test.mockk)
     androidTestImplementation(androidTest.espressoCore)

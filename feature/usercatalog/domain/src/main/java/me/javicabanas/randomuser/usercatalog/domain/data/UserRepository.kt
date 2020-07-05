@@ -8,7 +8,7 @@ import javax.inject.Inject
 
 class UserRepository @Inject constructor(
     private val network: UserNetworkDataSource,
-    private val local: LocalDataSource
+    private val local: UserLocalDataSource
 ) {
     fun getAllUsers(): Either<Failure, List<User>> = network.getAllUsers()
         .also {
@@ -31,7 +31,7 @@ interface UserNetworkDataSource {
     fun getAllUsers(): Either<Failure, List<User>>
 }
 
-interface LocalDataSource {
+interface UserLocalDataSource {
     fun getUser(userId: String): Either<Failure, User>
     fun setAllUsers(users: List<User>)
 }

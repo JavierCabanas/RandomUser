@@ -12,7 +12,7 @@ import org.junit.Test
 
 class UserRepositoryTest {
     private val network: UserNetworkDataSource = mockk()
-    private val local: LocalDataSource = mockk(relaxed = true)
+    private val local: UserLocalDataSource = mockk(relaxed = true)
     private val userRepository = UserRepository(network, local)
 
     @Test
