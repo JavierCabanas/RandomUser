@@ -2,19 +2,17 @@ package me.javicabanas.randomuser.usercatalog.userlist
 
 import me.javicabanas.randomuser.core.model.User
 
-data class UserUiModel(
+data class UserUiItem(
     val id: String,
-    val firstName: String,
-    val lastName: String,
+    val name: String,
     val city: String,
     val avatar: String,
     val background: String
 )
 
-fun User.toUi(): UserUiModel = UserUiModel(
+fun User.toUi(): UserUiItem = UserUiItem(
     id = id,
-    firstName = firstName,
-    lastName = lastName,
+    name = "$firstName $lastName",
     city = city,
     avatar = avatar,
     background = background

@@ -9,4 +9,5 @@ object Versions {
     const val compileSdk = 29
     const val targetSdk = 29
     const val daggerHilt = "2.28-alpha"
+    const val mockk = "1.10.0"
 }

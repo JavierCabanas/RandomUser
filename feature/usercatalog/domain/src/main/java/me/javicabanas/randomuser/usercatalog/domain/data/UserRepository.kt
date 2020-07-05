@@ -5,7 +5,7 @@ import me.javicabanas.randomuser.core.functional.Either
 import me.javicabanas.randomuser.core.model.User
 import javax.inject.Inject
 
-class UserRepository @Inject constructor(private val network: UserNetworkDataSource) {
+class UserRepository @Inject constructor( val network: UserNetworkDataSource) {
     fun getAllUsers(): Either<Failure, List<User>> = network.getAllUsers()
 }
 

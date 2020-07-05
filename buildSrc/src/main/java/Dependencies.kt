@@ -41,16 +41,29 @@ object libraries {
         const val lifecycleHilt = "androidx.hilt:hilt-lifecycle-viewmodel:$lifecycleHiltVersion"
         const val lifecycleHiltCompiler = "androidx.hilt:hilt-compiler:$lifecycleHiltVersion"
     }
+
+    object ui {
+        private const val glideVersion = "4.11.0"
+        const val material = "com.google.android.material:material:1.3.0-alpha01"
+        const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.0.0-beta7"
+        const val glide = "com.github.bumptech.glide:glide:$glideVersion"
+        const val glideCompiler = "com.github.bumptech.glide:compiler:$glideVersion"
+        const val recyclerview = "androidx.recyclerview:recyclerview:1.1.0"
+    }
 }
 
 object test {
     const val jUnit = "junit:junit:4.12"
-    const val mockk = "io.mockk:mockk:1.10.0"
+    const val mockk = "io.mockk:mockk:${Versions.mockk}"
     const val archCoreTesting = "android.arch.core:core-testing:2.1.0"
     const val daggerHilt = "com.google.dagger:hilt-android-testing:${Versions.daggerHilt}"
 }
 
 object androidTest {
-    const val espresso = "androidx.test.espresso:espresso-core:3.2.0"
+    const val runner = "androidx.test:runner:1.1.1"
+    const val espressoCore = "androidx.test.espresso:espresso-core:3.2.0"
+    const val espressoContrib = "androidx.test.espresso:espresso-contrib:3.2.0"
+    const val espressoIntents = "androidx.test.espresso:espresso-intents:3.2.0"
     const val jUnit = "androidx.test.ext:junit:1.1.1"
+    const val mockk = "io.mockk:mockk-android:${Versions.mockk}"
 }

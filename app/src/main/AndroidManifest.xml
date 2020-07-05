@@ -3,6 +3,8 @@
     package="me.javicabanas.randomuser"
     >
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".Application"
         android:allowBackup="true"

@@ -1,3 +1,4 @@
+include(":androidcommons")
 include(":testcommons")
 include(":androidtestcommons")
 include(":feature:usercatalog:data")
