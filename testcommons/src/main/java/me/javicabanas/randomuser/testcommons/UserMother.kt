@@ -17,4 +17,5 @@ object UserMother {
             description = "description-$it"
         )
     }
+    val user: User = users.first()
 }
