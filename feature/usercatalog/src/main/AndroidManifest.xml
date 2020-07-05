@@ -16,7 +16,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".userdetail.UserDetailActivity" />
+        <activity android:name=".userdetail.UserDetailActivity"
+            android:theme="@style/Theme.AppCompat.Light"
+            />
 
     </application>
 </manifest>
