@@ -18,6 +18,6 @@ class UserApiClient(private val userService: UserService) : UserNetworkDataSourc
 }
 
 interface UserService {
-    @GET("/users")
+    @GET("/Karumi/codetestdata/users")
     fun getAllUsers(): Call<List<UserApiModel>>
 }
