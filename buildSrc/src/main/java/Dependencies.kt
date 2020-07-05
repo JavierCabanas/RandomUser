@@ -43,9 +43,11 @@ object libraries {
     }
 
     object ui {
+        private const val glideVersion = "4.11.0"
         const val material = "com.google.android.material:material:1.3.0-alpha01"
         const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.0.0-beta7"
-
+        const val glide = "com.github.bumptech.glide:glide:$glideVersion"
+        const val glideCompiler = "com.github.bumptech.glide:compiler:$glideVersion"
     }
 }
 
