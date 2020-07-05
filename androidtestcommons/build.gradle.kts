@@ -2,6 +2,7 @@ plugins {
     id("com.android.library")
     kotlin("android")
     kotlin("android.extensions")
+    kotlin("kapt")
 }
 
 android {
@@ -43,7 +44,21 @@ dependencies {
     implementation(libraries.androidX.viewModelScope)
     implementation(libraries.coroutines.coroutinesTest)
     implementation(test.jUnit)
+    implementation(androidTest.jUnit)
+    implementation(androidTest.runner)
+    implementation(libraries.di.daggerHilt)
+    implementation(libraries.ui.recyclerview)
+    implementation(androidTest.espressoContrib)
+    kapt(libraries.di.daggerHiltCompiler)
+    implementation(test.daggerHilt)
+    implementation(libraries.di.lifecycleHilt)
+    kapt(libraries.di.lifecycleHiltCompiler)
+    implementation(androidTest.espressoIntents)
+
+
 
     testImplementation(test.jUnit)
-    androidTestImplementation(androidTest.espresso)
+    testImplementation(test.mockk)
+    androidTestImplementation(androidTest.espressoCore)
+    androidTestImplementation(test.mockk)
 }

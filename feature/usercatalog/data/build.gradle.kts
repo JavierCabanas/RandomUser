@@ -1,5 +1,3 @@
-import libraries.coroutines.android
-
 plugins {
     id("com.android.library")
 //    id("dagger.hilt.android.plugin")
@@ -54,5 +52,5 @@ dependencies {
 
     testImplementation(test.jUnit)
     testImplementation(libraries.network.mockWebServer)
-    androidTestImplementation(androidTest.espresso)
+    androidTestImplementation(androidTest.espressoCore)
 }

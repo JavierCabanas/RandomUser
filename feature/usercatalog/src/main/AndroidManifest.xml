@@ -4,7 +4,8 @@
     >
 
     <application>
-        <activity android:name=".userlist.UserListActivity">
+        <activity android:name=".userlist.UserListActivity"
+            android:theme="@style/Theme.AppCompat.Light">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />

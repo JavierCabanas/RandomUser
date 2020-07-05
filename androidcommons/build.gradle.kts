@@ -52,5 +52,5 @@ dependencies {
 
     testImplementation(test.jUnit)
     testImplementation(test.mockk)
-    androidTestImplementation(androidTest.espresso)
+    androidTestImplementation(androidTest.espressoCore)
 }

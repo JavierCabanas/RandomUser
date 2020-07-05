@@ -51,5 +51,5 @@ dependencies {
     kapt(libraries.di.daggerHiltCompiler)
 
     testImplementation(test.jUnit)
-    androidTestImplementation(androidTest.espresso)
+    androidTestImplementation(androidTest.espressoCore)
 }

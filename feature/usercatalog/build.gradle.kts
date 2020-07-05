@@ -16,7 +16,8 @@ android {
         versionCode = Versions.versionCode
         versionName = Versions.versionName
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner =
+            "me.javicabanas.randomuser.androidtestcommons.runner.HiltTestRunner"
     }
 
     buildTypes {
@@ -63,5 +64,18 @@ dependencies {
     testImplementation(test.archCoreTesting)
     testImplementation(test.mockk)
     testImplementation(libraries.coroutines.coroutinesTest)
-    androidTestImplementation(androidTest.espresso)
+
+    androidTestImplementation(project(":testcommons"))
+    androidTestImplementation(project(":androidtestcommons"))
+    androidTestImplementation(test.jUnit)
+    androidTestImplementation(androidTest.mockk)
+    androidTestImplementation(androidTest.runner)
+    androidTestImplementation(androidTest.espressoCore)
+    androidTestImplementation(androidTest.espressoContrib)
+    androidTestImplementation(androidTest.espressoIntents)
+    androidTestImplementation(libraries.di.daggerHilt)
+    androidTestImplementation(test.daggerHilt)
+    kaptAndroidTest(libraries.di.daggerHiltCompiler)
+    androidTestImplementation(libraries.di.lifecycleHilt)
+    kaptAndroidTest(libraries.di.lifecycleHiltCompiler)
 }
