@@ -50,7 +50,7 @@ class UserListViewModelTest {
     private fun givenAListWithUsers(): List<UserUiItem> {
         val users = UserMother.users
         coEvery { getAllUsers(Unit) } returns users.toRight()
-        return users.map { it.toUi() }
+        return users.map { it.toListUi() }
     }
 
     @Test
