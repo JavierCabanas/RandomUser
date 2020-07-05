@@ -34,6 +34,9 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }
 
 dependencies {
@@ -44,10 +47,13 @@ dependencies {
     implementation(libraries.androidX.core)
     implementation(libraries.androidX.viewModel)
     implementation(libraries.androidX.viewModelScope)
+    implementation("androidx.activity:activity-ktx:1.1.0")
     implementation(libraries.di.daggerHilt)
     kapt(libraries.di.daggerHiltCompiler)
     implementation(libraries.di.lifecycleHilt)
     kapt(libraries.di.lifecycleHiltCompiler)
+    implementation(libraries.ui.material)
+    implementation(libraries.ui.constraintLayout)
 
     testImplementation(project(":testcommons"))
     testImplementation(test.jUnit)

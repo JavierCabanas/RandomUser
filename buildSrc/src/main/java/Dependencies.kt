@@ -41,6 +41,12 @@ object libraries {
         const val lifecycleHilt = "androidx.hilt:hilt-lifecycle-viewmodel:$lifecycleHiltVersion"
         const val lifecycleHiltCompiler = "androidx.hilt:hilt-compiler:$lifecycleHiltVersion"
     }
+
+    object ui {
+        const val material = "com.google.android.material:material:1.3.0-alpha01"
+        const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.0.0-beta7"
+
+    }
 }
 
 object test {
