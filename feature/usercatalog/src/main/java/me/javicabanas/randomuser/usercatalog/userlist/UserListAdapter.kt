@@ -11,8 +11,11 @@ import me.javicabanas.randomuser.androidcommons.view.setCircularImageUrl
 import me.javicabanas.randomuser.androidcommons.view.setImageUrl
 import me.javicabanas.randomuser.usercatalog.R
 
+typealias ClickCallback = (String) -> Unit
+
 class UserListAdapter : RecyclerView.Adapter<UserListAdapter.UserViewHolder>(),
     AutoUpdatableAdapter {
+    var onItemClick: ClickCallback? = null
     var items: List<UserUiItem> by Delegates.observable(emptyList()) { _, oldList, newList ->
         autoNotify(oldList, newList) { oldItem, newItem -> oldItem.id == newItem.id }
     }
@@ -32,6 +35,7 @@ class UserListAdapter : RecyclerView.Adapter<UserListAdapter.UserViewHolder>(),
                 city.text = user.city
                 backgroundImage.setImageUrl(user.background)
                 avatar.setCircularImageUrl(user.avatar)
+                this.setOnClickListener { onItemClick?.invoke(user.id) }
             }
         }
     }

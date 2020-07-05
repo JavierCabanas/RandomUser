@@ -7,7 +7,8 @@ data class UserUiDetail(
     val gender: String,
     val city: String,
     val email: String,
-    val description: String
+    val description: String,
+    val avatar: String
 )
 
 fun User.toDetailUi(): UserUiDetail =
@@ -16,5 +17,6 @@ fun User.toDetailUi(): UserUiDetail =
         gender = gender,
         city = city,
         email = email,
-        description = description
+        description = description,
+        avatar = avatar
     )
