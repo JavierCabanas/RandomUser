@@ -47,7 +47,7 @@ class UserListViewModelTest {
         assert(viewModel.viewState.value == UserListViewState.WithData(users))
     }
 
-    private fun givenAListWithUsers(): List<UserUiModel> {
+    private fun givenAListWithUsers(): List<UserUiItem> {
         val users = UserMother.users
         coEvery { getAllUsers(Unit) } returns users.toRight()
         return users.map { it.toUi() }
@@ -57,7 +57,7 @@ class UserListViewModelTest {
     fun `should lead to Empty state when a failure is received`() {
         givenAFailureResponse()
         viewModel.loadUsers()
-        assert(viewModel.viewState.value == UserListViewState.Empty)
+        assert(viewModel.viewState.value == UserListViewState.Error)
     }
 
     private fun givenAFailureResponse() {

@@ -12,7 +12,7 @@ class UserListViewModel @ViewModelInject constructor(private val getAllUsers: Ge
     ViewModel() {
     private val _viewState = MutableLiveData<UserListViewState>()
         .apply {
-            value = UserListViewState.Empty
+            value = UserListViewState.Loading
         }
     val viewState: LiveData<UserListViewState> = _viewState
     fun loadUsers() {
@@ -24,7 +24,7 @@ class UserListViewModel @ViewModelInject constructor(private val getAllUsers: Ge
                 }
                 .fold(
                     ifLeft = {
-                        UserListViewState.Empty
+                        UserListViewState.Error
                     },
                     ifRight = {
                         UserListViewState.WithData(it)

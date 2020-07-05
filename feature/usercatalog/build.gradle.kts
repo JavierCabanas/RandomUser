@@ -42,6 +42,7 @@ android {
 dependencies {
     implementation(project(":core"))
     implementation(project(":feature:usercatalog:domain"))
+    implementation(project(":androidcommons"))
     implementation(libraries.kotlin)
     implementation(libraries.androidX.appcompat)
     implementation(libraries.androidX.core)
@@ -54,11 +55,13 @@ dependencies {
     kapt(libraries.di.lifecycleHiltCompiler)
     implementation(libraries.ui.material)
     implementation(libraries.ui.constraintLayout)
+    implementation(libraries.ui.glide)
+    kapt(libraries.ui.glideCompiler)
 
     testImplementation(project(":testcommons"))
     testImplementation(test.jUnit)
     testImplementation(test.archCoreTesting)
     testImplementation(test.mockk)
-    implementation(libraries.coroutines.coroutinesTest)
+    testImplementation(libraries.coroutines.coroutinesTest)
     androidTestImplementation(androidTest.espresso)
 }
