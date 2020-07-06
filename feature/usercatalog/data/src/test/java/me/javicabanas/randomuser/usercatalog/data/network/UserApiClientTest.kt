@@ -1,9 +1,11 @@
 package me.javicabanas.randomuser.usercatalog.data.network
 
 import me.javicabanas.randomuser.core.failure.Failure
+import me.javicabanas.randomuser.core.functional.Either
 import me.javicabanas.randomuser.core.functional.contains
 import me.javicabanas.randomuser.core.model.User
 import me.javicabanas.randomuser.network.client.ApiClientBuilder
+import me.javicabanas.randomuser.testcommons.UserMother
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.After
@@ -41,7 +43,7 @@ class UserApiClientTest {
     }
 
     @Test
-    fun `should return the expected list of users when call to getProductList`() {
+    fun `should return the expected list of users when call to getAllUsers`() {
         val expectedUserList = givenASuccessfullUsersResponse()
         val response = userApiClient.getAllUsers()
 
@@ -49,17 +51,7 @@ class UserApiClientTest {
     }
 
     private fun givenASuccessfullUsersResponse(): List<User> {
-        val user = User(
-            id = "id",
-            firstName = "firstName",
-            lastName = "lastName",
-            city = "city",
-            avatar = "avatar",
-            background = "background",
-            gender = "gender",
-            email = "email",
-            description = "description"
-        )
+        val user = UserMother.user
         val responseBody = with(user) {
             """
                 [
@@ -87,7 +79,7 @@ class UserApiClientTest {
     }
 
     @Test
-    fun `should return Failure object when call to getProductList fails`() {
+    fun `should return Failure object when call to getAllUsers fails`() {
         val expectedFailure = givenAnyFailedResponse()
         val response = userApiClient.getAllUsers()
 
@@ -95,16 +87,75 @@ class UserApiClientTest {
     }
 
     private fun givenAnyFailedResponse(): Failure {
-        val body = """
-            {
-             error_message: "Not Found"
-            }
-        """.trimIndent()
         mockWebServer.enqueue(
             MockResponse()
-                .setBody(body)
                 .setResponseCode(404)
         )
-        return Failure.ElementNotFound(reason = body)
+        return Failure.ElementNotFound("")
+    }
+
+    @Test
+    fun `should return the expected user when call to getUser`() {
+        val user = givenASuccessfullUserResponse()
+        val response = userApiClient.getUser(user.id)
+
+        assert(response.contains(user))
+    }
+
+    private fun givenASuccessfullUserResponse(): User {
+        val user = UserMother.user
+        val responseBody = with(user) {
+            """
+                    {
+                      "id": "$id",
+                      "first_name": "$firstName",
+                      "last_name": "$lastName",
+                      "email": "$email",
+                      "gender": "$gender",
+                      "ip_address": "174.193.154.100",
+                      "avatar": "$avatar",
+                      "city": "$city",
+                      "background": "$background",
+                      "description": "$description"
+                    }
+            """.trimIndent()
+        }
+        mockWebServer.enqueue(
+            MockResponse()
+                .setResponseCode(200)
+                .setBody(responseBody)
+        )
+        return user
+    }
+
+    @Test
+    fun `should return Failure object when call to getUser fails`() {
+        val expectedFailure = givenAnyFailedResponse()
+        val response = userApiClient.getUser(UserMother.user.id)
+
+        assert(response.swap().contains(expectedFailure))
+    }
+
+    @Test
+    fun `should return Right when call to deleteUser`() {
+        val user = givenASuccessfullDeleteResponse()
+        val response = userApiClient.deleteUser(user.id)
+
+        assert(response is Either.Right)
+    }
+
+    private fun givenASuccessfullDeleteResponse(): User {
+        val user = UserMother.user
+        val responseBody =
+            """
+                {}
+            """.trimIndent()
+
+        mockWebServer.enqueue(
+            MockResponse()
+                .setResponseCode(200)
+                .setBody(responseBody)
+        )
+        return user
     }
 }

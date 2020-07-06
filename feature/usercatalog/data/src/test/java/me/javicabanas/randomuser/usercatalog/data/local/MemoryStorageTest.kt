@@ -18,13 +18,30 @@ class MemoryStorageTest {
 
     @Test
     fun `should return expected user when it is stored`() {
-        val expectedUser= UserMother.user
+        val expectedUser = UserMother.user
         val memoryStorage = givenAStorageWithUsers(expectedUser)
         val result = memoryStorage.getUser(UserMother.user.id)
         assert(result.contains(expectedUser))
     }
+
     private fun givenAStorageWithUsers(expectedUser: User): MemoryStorage =
-        MemoryStorage().apply { setAllUsers(listOf(expectedUser)) }
+        MemoryStorage().apply { setUserList(listOf(expectedUser)) }
 
+    @Test
+    fun `should return a Failure when there are not deleted users`() {
+        val memoryStorage = givenAnEmptyStorage()
+        val result = memoryStorage.getDeletedUsersIds()
+        assert(result.swap().exists { it is Failure.ElementNotFound })
+    }
 
+    @Test
+    fun `should return list of ids when there are deleted Users`() {
+        val expectedUserId = UserMother.user.id
+        val memoryStorage = givenAStorageWithDeletedUsers(expectedUserId)
+        val result = memoryStorage.getDeletedUsersIds()
+        assert(result.exists { it.contains(expectedUserId) })
+    }
+
+    private fun givenAStorageWithDeletedUsers(expectedUserId: String): MemoryStorage =
+        MemoryStorage().apply { deleteUser(expectedUserId) }
 }

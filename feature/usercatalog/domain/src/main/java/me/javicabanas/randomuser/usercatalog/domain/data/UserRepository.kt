@@ -28,7 +28,7 @@ class UserRepository @Inject constructor(
 
     private fun persistUsers(maybeUsers: Either<Failure, List<User>>) {
         maybeUsers.map { users ->
-            local.setAllUsers(users)
+            local.setUserList(users)
         }
     }
 
@@ -55,7 +55,7 @@ interface UserNetworkDataSource {
 interface UserLocalDataSource {
     fun getAllUsers(): Either<Failure, List<User>>
     fun getUser(userId: String): Either<Failure, User>
-    fun setAllUsers(users: List<User>)
+    fun setUserList(users: List<User>)
     fun deleteUser(userId: String): Either<Failure, Unit>
     fun getDeletedUsersIds(): Either<Failure, List<String>>
 }
