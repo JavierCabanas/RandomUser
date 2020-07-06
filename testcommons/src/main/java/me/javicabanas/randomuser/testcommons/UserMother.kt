@@ -7,8 +7,8 @@ object UserMother {
     val users = (1..10).map {
         User(
             id = "id-$it",
-            avatar = "avatar-$it",
-            background = "background-$it",
+            avatar = "https://robohash.org/evenietundehic.png?size=50x50&set=set1",
+            background = "https://robohash.org/evenietundehic.png?size=50x50&set=set2",
             city = "city-$it",
             firstName = "firstName-$it",
             lastName = "lastName-$it",

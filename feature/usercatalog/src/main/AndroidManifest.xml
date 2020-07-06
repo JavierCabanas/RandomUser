@@ -3,11 +3,8 @@
     package="me.javicabanas.randomuser.usercatalog"
     >
 
-    <application>
-        <activity
-            android:name=".userlist.UserListActivity"
-            android:theme="@style/Theme.AppCompat.Light"
-            >
+    <application android:theme="@style/AppTheme">
+        <activity android:name=".userlist.UserListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
@@ -16,9 +13,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".userdetail.UserDetailActivity"
-            android:theme="@style/Theme.AppCompat.Light"
-            />
+        <activity android:name=".userdetail.UserDetailActivity" />
 
     </application>
 </manifest>

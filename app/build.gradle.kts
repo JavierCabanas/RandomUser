@@ -51,6 +51,8 @@ dependencies {
     implementation(libraries.di.lifecycleHilt)
     kapt(libraries.di.lifecycleHiltCompiler)
 
+    implementation(libraries.ui.material)
+
     testImplementation(test.jUnit)
 
     androidTestImplementation(androidTest.jUnit)

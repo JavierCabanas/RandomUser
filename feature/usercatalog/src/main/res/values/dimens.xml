@@ -2,6 +2,6 @@
 <resources>
     <dimen name="user_item_height">200dp</dimen>
     <dimen name="avatar_item_size">120dp</dimen>
-    <dimen name="size_xs">8.00dp</dimen>
-    <dimen name="defaultMargin">16.00dp</dimen>
+    <dimen name="defaultMargin">16dp</dimen>
+    <dimen name="detail_header_height">200dp</dimen>
 </resources>

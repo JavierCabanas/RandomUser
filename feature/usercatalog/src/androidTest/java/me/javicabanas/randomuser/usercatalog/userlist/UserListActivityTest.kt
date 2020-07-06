@@ -22,7 +22,7 @@ import io.mockk.every
 import io.mockk.mockk
 import me.javicabanas.randomuser.androidtestcommons.matchers.RecyclerViewItemsCountMatcher
 import me.javicabanas.randomuser.androidtestcommons.recyclerview.RecyclerViewInteraction
-import me.javicabanas.randomuser.androidtestcommons.runner.AcceptanceTest
+import me.javicabanas.randomuser.androidtestcommons.AcceptanceTest
 import me.javicabanas.randomuser.core.functional.toRight
 import me.javicabanas.randomuser.core.model.User
 import me.javicabanas.randomuser.testcommons.UserMother
@@ -44,7 +44,7 @@ class UserListActivityTest : AcceptanceTest<UserListActivity>(UserListActivity::
 
     @Module
     @InstallIn(ApplicationComponent::class)
-    inner class FakeBarModule {
+    inner class FakeRepositoryModule {
         @Provides
         @Singleton
         fun provideRepository(): UserRepository = repository

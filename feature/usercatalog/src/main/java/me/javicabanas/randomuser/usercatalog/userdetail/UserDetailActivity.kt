@@ -7,9 +7,12 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_user_detail.*
-import kotlinx.android.synthetic.main.toolbar_user_detail.*
+import kotlinx.android.synthetic.main.activity_user_list.*
+import kotlinx.android.synthetic.main.content_user_detail.*
 import me.javicabanas.randomuser.androidcommons.lifecycle.observe
+import me.javicabanas.randomuser.androidcommons.view.gone
 import me.javicabanas.randomuser.androidcommons.view.setImageUrl
+import me.javicabanas.randomuser.androidcommons.view.visible
 import me.javicabanas.randomuser.core.utills.exhaustive
 import me.javicabanas.randomuser.usercatalog.R
 
@@ -42,11 +45,13 @@ class UserDetailActivity : AppCompatActivity() {
     }
 
     private fun renderError() {
-
+        progressIndicator.hide()
+        notFoundImage.visible()
     }
 
     private fun renderLoading() {
-
+        notFoundImage.gone()
+        progressIndicator.show()
     }
 
     private fun renderWithData(user: UserUiDetail) {
