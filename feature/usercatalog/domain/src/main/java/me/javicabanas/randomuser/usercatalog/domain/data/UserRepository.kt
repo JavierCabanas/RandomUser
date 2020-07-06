@@ -11,27 +11,52 @@ class UserRepository @Inject constructor(
     private val local: UserLocalDataSource
 ) {
     fun getAllUsers(): Either<Failure, List<User>> = network.getAllUsers()
-        .also {
-            it.map { users ->
-                local.setAllUsers(users)
-            }
+        .map { users ->
+            filterDeletedLocally(users)
+        }.also {
+            persistUsers(it)
         }
 
-    fun getUser(request: String): Either<Failure, User> {
-        return local.getUser(request).flatMapLeft {
-            network.getAllUsers()
-                .map { users ->
-                    users.first { it.id == request }
-                }
+    private fun filterDeletedLocally(users: List<User>): List<User> {
+        return local.getDeletedUsersIds().fold(
+            ifLeft = {
+                users
+            }, ifRight = { deletedIds ->
+                users.filterNot { deletedIds.contains(it.id) }
+            })
+    }
+
+    private fun persistUsers(maybeUsers: Either<Failure, List<User>>) {
+        maybeUsers.map { users ->
+            local.setAllUsers(users)
         }
     }
+
+    fun getUser(request: String): Either<Failure, User> = local.getUser(request)
+        .flatMapLeft {
+            network.getUser(request)
+        }
+
+    fun deleteUser(userId: String): Either<Failure, Unit> =
+        network.deleteUser(userId)
+            .also {
+                it.map { local.deleteUser(userId) }
+            }
+
+
 }
 
 interface UserNetworkDataSource {
     fun getAllUsers(): Either<Failure, List<User>>
+    fun getUser(userId: String): Either<Failure, User>
+    fun deleteUser(userId: String): Either<Failure, Unit>
 }
 
 interface UserLocalDataSource {
+    fun getAllUsers(): Either<Failure, List<User>>
     fun getUser(userId: String): Either<Failure, User>
     fun setAllUsers(users: List<User>)
+    fun deleteUser(userId: String): Either<Failure, Unit>
+    fun getDeletedUsersIds(): Either<Failure, List<String>>
 }
+
