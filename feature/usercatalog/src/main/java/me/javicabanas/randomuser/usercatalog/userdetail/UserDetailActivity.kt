@@ -7,7 +7,6 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_user_detail.*
-import kotlinx.android.synthetic.main.activity_user_list.*
 import kotlinx.android.synthetic.main.content_user_detail.*
 import me.javicabanas.randomuser.androidcommons.lifecycle.observe
 import me.javicabanas.randomuser.androidcommons.view.gone

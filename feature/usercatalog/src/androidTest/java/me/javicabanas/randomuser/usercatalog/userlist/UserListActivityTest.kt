@@ -120,7 +120,7 @@ class UserListActivityTest : AcceptanceTest<UserListActivity>(UserListActivity::
     }
 
     @Test
-    fun doesNotShowLoadingIfThereAreAnError() {
+    fun doesNotShowLoadingIfThereIsAnError() {
         givenThereAreNoUsers()
         startActivity()
         onView(withId(R.id.progressIndicator)).check(matches(not(isDisplayed())))
