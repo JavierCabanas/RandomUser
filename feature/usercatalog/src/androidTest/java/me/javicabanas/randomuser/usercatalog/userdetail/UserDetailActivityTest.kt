@@ -101,7 +101,7 @@ class UserDetailActivityTest : AcceptanceTest<UserDetailActivity>(UserDetailActi
 
     @Test
     fun doesNotShowLoadingIfThereIsAnError() {
-        val user = givenThereIsNoUser()
+        givenThereIsNoUser()
         startActivity(UserMother.user)
         onView(withId(R.id.progressIndicator))
             .check(matches(CoreMatchers.not(isDisplayed())))

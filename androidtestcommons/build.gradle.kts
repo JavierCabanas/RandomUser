@@ -33,6 +33,10 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }
 
 dependencies {
@@ -58,5 +62,5 @@ dependencies {
     testImplementation(test.jUnit)
     testImplementation(test.mockk)
     androidTestImplementation(androidTest.espressoCore)
-    androidTestImplementation(test.mockk)
+    androidTestImplementation(androidTest.mockk)
 }
