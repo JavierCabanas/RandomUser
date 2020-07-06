@@ -20,7 +20,7 @@ class UserListViewModel @ViewModelInject constructor(private val getAllUsers: Ge
         viewModelScope.launch {
             _viewState.value = getAllUsers(Unit)
                 .map { users ->
-                    users.map { it.toUi() }
+                    users.map { it.toListUi() }
                 }
                 .fold(
                     ifLeft = {

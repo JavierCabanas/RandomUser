@@ -10,7 +10,7 @@ data class UserUiItem(
     val background: String
 )
 
-fun User.toUi(): UserUiItem = UserUiItem(
+fun User.toListUi(): UserUiItem = UserUiItem(
     id = id,
     name = "$firstName $lastName",
     city = city,

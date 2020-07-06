@@ -1,7 +1,13 @@
 package me.javicabanas.randomuser.usercatalog.userlist
 
+import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition
+import androidx.test.espresso.intent.Intents.intended
+import androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent
+import androidx.test.espresso.intent.matcher.IntentMatchers.hasExtra
 import androidx.test.espresso.matcher.ViewMatchers.hasDescendant
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
@@ -16,12 +22,13 @@ import io.mockk.every
 import io.mockk.mockk
 import me.javicabanas.randomuser.androidtestcommons.matchers.RecyclerViewItemsCountMatcher
 import me.javicabanas.randomuser.androidtestcommons.recyclerview.RecyclerViewInteraction
-import me.javicabanas.randomuser.androidtestcommons.runner.AcceptanceTest
+import me.javicabanas.randomuser.androidtestcommons.AcceptanceTest
 import me.javicabanas.randomuser.core.functional.toRight
 import me.javicabanas.randomuser.core.model.User
 import me.javicabanas.randomuser.testcommons.UserMother
 import me.javicabanas.randomuser.usercatalog.R
 import me.javicabanas.randomuser.usercatalog.domain.data.UserRepository
+import me.javicabanas.randomuser.usercatalog.userdetail.UserDetailActivity
 import org.hamcrest.CoreMatchers.not
 import org.junit.Rule
 import org.junit.Test
@@ -31,18 +38,20 @@ import javax.inject.Singleton
 class UserListActivityTest : AcceptanceTest<UserListActivity>(UserListActivity::class.java) {
     @get:Rule
     var rule = HiltAndroidRule(this)
-    val repository: UserRepository = UserRepository(mockk())
+    val repository: UserRepository = mockk {
+        every { getUser(any()) } returns UserMother.user.toRight()
+    }
 
     @Module
     @InstallIn(ApplicationComponent::class)
-    inner class FakeBarModule {
+    inner class FakeRepositoryModule {
         @Provides
         @Singleton
         fun provideRepository(): UserRepository = repository
     }
 
     @Test
-    fun showsErrorStateIfThereAreNoSuperHeroes() {
+    fun showsErrorStateIfThereAreNoUsers() {
         givenThereAreNoUsers()
         startActivity()
         onView(withId(R.id.notFoundImage)).check(matches(isDisplayed()))
@@ -53,7 +62,7 @@ class UserListActivityTest : AcceptanceTest<UserListActivity>(UserListActivity::
     }
 
     @Test
-    fun showsExactNumberOfSuperHeroes() {
+    fun showsExactNumberOfUsers() {
         val userList = givenThereAreUsers()
         startActivity()
         onView(withId(R.id.userRecyclerView)).check(
@@ -69,10 +78,10 @@ class UserListActivityTest : AcceptanceTest<UserListActivity>(UserListActivity::
 
     @Test
     fun showsUsersNameIfThereUsers() {
-        val superHeroes = givenThereAreUsers()
+        val users = givenThereAreUsers()
         startActivity()
         RecyclerViewInteraction.onRecyclerView<User>(withId(R.id.userRecyclerView))
-            .withItems(superHeroes)
+            .withItems(users)
             .check { user, view, exception ->
                 val expectedName = "${user.firstName} ${user.lastName}"
                 matches(hasDescendant(withText(expectedName))).check(
@@ -84,10 +93,10 @@ class UserListActivityTest : AcceptanceTest<UserListActivity>(UserListActivity::
 
     @Test
     fun showsUsersCityIfThereUsers() {
-        val superHeroes = givenThereAreUsers()
+        val users = givenThereAreUsers()
         startActivity()
         RecyclerViewInteraction.onRecyclerView<User>(withId(R.id.userRecyclerView))
-            .withItems(superHeroes)
+            .withItems(users)
             .check { user, view, exception ->
                 matches(hasDescendant(withText(user.city))).check(
                     view,
@@ -98,15 +107,35 @@ class UserListActivityTest : AcceptanceTest<UserListActivity>(UserListActivity::
 
     @Test
     fun doesNotShowErrorStateIfThereAreUsers() {
-        val superHeroes = givenThereAreUsers()
+        givenThereAreUsers()
         startActivity()
         onView(withId(R.id.notFoundImage)).check(matches(not(isDisplayed())))
     }
 
     @Test
     fun doesNotShowLoadingIfThereAreUsers() {
-        val superHeroes = givenThereAreUsers()
+        givenThereAreUsers()
         startActivity()
         onView(withId(R.id.progressIndicator)).check(matches(not(isDisplayed())))
+    }
+
+    @Test
+    fun doesNotShowLoadingIfThereIsAnError() {
+        givenThereAreNoUsers()
+        startActivity()
+        onView(withId(R.id.progressIndicator)).check(matches(not(isDisplayed())))
+    }
+
+    @Test
+    fun opensUserDetailWhenClickOnListItem() {
+        val users = givenThereAreUsers()
+        val itemIndex = 0
+        startActivity()
+
+        onView(withId(R.id.userRecyclerView))
+            .perform(actionOnItemAtPosition<RecyclerView.ViewHolder>(itemIndex, click()))
+        val userSelected = users[itemIndex]
+        intended(hasComponent(UserDetailActivity::class.java.canonicalName))
+        intended(hasExtra("userId", userSelected.id))
     }
 }

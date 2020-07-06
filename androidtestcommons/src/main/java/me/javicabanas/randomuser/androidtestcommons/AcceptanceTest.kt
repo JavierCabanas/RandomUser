@@ -1,4 +1,4 @@
-package me.javicabanas.randomuser.androidtestcommons.runner
+package me.javicabanas.randomuser.androidtestcommons
 
 import android.app.Activity
 import android.content.Intent

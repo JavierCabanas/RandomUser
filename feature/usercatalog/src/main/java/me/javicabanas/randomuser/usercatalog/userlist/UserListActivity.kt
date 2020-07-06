@@ -11,6 +11,7 @@ import me.javicabanas.randomuser.androidcommons.view.gone
 import me.javicabanas.randomuser.androidcommons.view.visible
 import me.javicabanas.randomuser.core.utills.exhaustive
 import me.javicabanas.randomuser.usercatalog.R
+import me.javicabanas.randomuser.usercatalog.userdetail.UserDetailActivity
 
 @AndroidEntryPoint
 class UserListActivity : AppCompatActivity() {
@@ -28,6 +29,7 @@ class UserListActivity : AppCompatActivity() {
         userRecyclerView.adapter = adapter
         userRecyclerView.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        adapter.onItemClick = ::openDetail
     }
 
     private fun onStateUpdated(userListViewState: UserListViewState) {
@@ -53,5 +55,9 @@ class UserListActivity : AppCompatActivity() {
         notFoundImage.gone()
         userRecyclerView.visible()
         adapter.items = users
+    }
+
+    private fun openDetail(userId: String) {
+        UserDetailActivity.open(this, userId)
     }
 }
