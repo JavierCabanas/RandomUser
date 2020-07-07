@@ -1,7 +1,5 @@
-# Random User
+# Random User - Code Challenge for Aplazame Lead Android Engineer
 [![CircleCI](https://circleci.com/gh>/JavierCabanas/RandomUser.svg?style=svg&circle-token=b04352c186322e57e66b79b73f99f7c31719e949)]
-
-# Code Challenge for Aplazame Lead Android Engineer
 
 App that shows a List and a detail of users retrieved from https://my-json-server.typicode.com/Karumi/codetestdata/users
 
