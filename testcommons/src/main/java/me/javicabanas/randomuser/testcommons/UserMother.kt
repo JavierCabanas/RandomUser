@@ -18,4 +18,5 @@ object UserMother {
         )
     }
     val user: User = users.first()
+    val deletedUserIds: List<String> = users.subList(0, 2).map { it.id }
 }

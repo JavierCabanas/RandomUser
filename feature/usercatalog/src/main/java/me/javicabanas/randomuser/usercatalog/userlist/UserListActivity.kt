@@ -30,6 +30,7 @@ class UserListActivity : AppCompatActivity() {
         userRecyclerView.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         adapter.onItemClick = ::openDetail
+        adapter.onDeleteButtonClick = viewModel::deleteUserWithId
     }
 
     private fun onStateUpdated(userListViewState: UserListViewState) {

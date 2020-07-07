@@ -23,6 +23,7 @@ import io.mockk.mockk
 import me.javicabanas.randomuser.androidtestcommons.matchers.RecyclerViewItemsCountMatcher
 import me.javicabanas.randomuser.androidtestcommons.recyclerview.RecyclerViewInteraction
 import me.javicabanas.randomuser.androidtestcommons.AcceptanceTest
+import me.javicabanas.randomuser.androidtestcommons.recyclerview.clickOnChildWithId
 import me.javicabanas.randomuser.core.functional.toRight
 import me.javicabanas.randomuser.core.model.User
 import me.javicabanas.randomuser.testcommons.UserMother
@@ -137,5 +138,33 @@ class UserListActivityTest : AcceptanceTest<UserListActivity>(UserListActivity::
         val userSelected = users[itemIndex]
         intended(hasComponent(UserDetailActivity::class.java.canonicalName))
         intended(hasExtra("userId", userSelected.id))
+    }
+
+    @Test
+    fun deletesUserWhenClickOnButton() {
+        val itemIndex = 0
+        val users = givenThereAreUsersAndOneWillBeDeleted(itemIndex)
+        startActivity()
+        onView(withId(R.id.userRecyclerView))
+            .perform(
+                actionOnItemAtPosition<RecyclerView.ViewHolder>(
+                    itemIndex,
+                    clickOnChildWithId(R.id.deleteUserButton)
+                )
+            )
+        onView(withId(R.id.userRecyclerView)).check(
+            matches(RecyclerViewItemsCountMatcher(users.size - 1))
+        )
+    }
+
+    private fun givenThereAreUsersAndOneWillBeDeleted(itemIndex: Int): List<User> {
+        val initialUsers = UserMother.users
+        every { repository.getAllUsers() } answers {
+            initialUsers.toRight()
+        } andThen {
+            (initialUsers - initialUsers[itemIndex]).toRight()
+        }
+        every { repository.deleteUser(initialUsers[itemIndex].id) } returns Unit.toRight()
+        return initialUsers
     }
 }

@@ -111,6 +111,14 @@ class UserDetailActivityTest : AcceptanceTest<UserDetailActivity>(UserDetailActi
         every { repository.getUser(any()) } returns Failure.ElementNotFound("").toLeft()
     }
 
+    @Test
+    fun doesNotShowErrorIfThereIsaUser() {
+        val user = givenAUser()
+        startActivity(user)
+        onView(withId(R.id.notFoundImage))
+            .check(matches(CoreMatchers.not(isDisplayed())))
+    }
+
     private fun startActivity(user: User) {
         val args = Bundle()
         args.putString("userId", user.id)
