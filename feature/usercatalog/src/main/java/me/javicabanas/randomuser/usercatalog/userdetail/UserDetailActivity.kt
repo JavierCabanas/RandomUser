@@ -54,6 +54,7 @@ class UserDetailActivity : AppCompatActivity() {
     }
 
     private fun renderWithData(user: UserUiDetail) {
+        progressIndicator.hide()
         collapsingToolbar.title = user.name
         avatar.setImageUrl(user.avatar)
         email.text = user.email
