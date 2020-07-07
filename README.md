@@ -1,5 +1,5 @@
 # Random User - Code Challenge for Aplazame Lead Android Engineer
-![CircleCI](https://circleci.com/gh>/JavierCabanas/RandomUser.svg?style=svg&circle-token=b04352c186322e57e66b79b73f99f7c31719e949)]
+![CircleCI](https://circleci.com/gh/JavierCabanas/RandomUser/tree/master.svg?style=svg&circle-token=b04352c186322e57e66b79b73f99f7c31719e949)
 
 App that shows a List and a detail of users retrieved from https://my-json-server.typicode.com/Karumi/codetestdata/users
 
@@ -28,3 +28,6 @@ This is possible because [datasource implementations are hidden under the interf
 * Add cache invalidation policies (especially in the memory storage to decrease unnecessary RAM consumption)
 * Integrate CI with Firebase test labs to execute UI tets remotely
 * Improve failure modeling: the current one is horizontal to the whole app. It could be convenient to have different sealed classes of failures, more specific to each layer or each functionality.
+
+### Projet management
+As a help to make the development of the test in an incremental way [there is a project in Trello](https://trello.com/b/BjNPy0LH/prueba-c%C3%B3digo-aplazame) with a kanban board with the main milestones
