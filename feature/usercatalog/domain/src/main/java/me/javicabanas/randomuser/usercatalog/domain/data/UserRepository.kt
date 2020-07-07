@@ -42,8 +42,6 @@ class UserRepository @Inject constructor(
             .also {
                 it.map { local.deleteUser(userId) }
             }
-
-
 }
 
 interface UserNetworkDataSource {
@@ -59,4 +57,3 @@ interface UserLocalDataSource {
     fun deleteUser(userId: String): Either<Failure, Unit>
     fun getDeletedUsersIds(): Either<Failure, List<String>>
 }
-

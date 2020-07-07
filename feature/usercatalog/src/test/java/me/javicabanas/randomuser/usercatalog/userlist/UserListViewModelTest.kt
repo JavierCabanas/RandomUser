@@ -11,6 +11,7 @@ import me.javicabanas.randomuser.core.functional.toLeft
 import me.javicabanas.randomuser.core.functional.toRight
 import me.javicabanas.randomuser.testcommons.CoroutinesTestRule
 import me.javicabanas.randomuser.testcommons.UserMother
+import me.javicabanas.randomuser.usercatalog.domain.DeleteUser
 import me.javicabanas.randomuser.usercatalog.domain.GetAllUsers
 import org.junit.After
 import org.junit.Before
@@ -26,12 +27,13 @@ class UserListViewModelTest {
     @get:Rule
     val liveDataRule: TestRule = InstantTaskExecutorRule()
     private val getAllUsers: GetAllUsers = mockk()
+    private val deleteUser: DeleteUser = mockk()
     private lateinit var viewModel: UserListViewModel
     private val mockObserver: Observer<UserListViewState> = mockk(relaxed = true)
 
     @Before
     fun setupViewModel() {
-        viewModel = UserListViewModel(getAllUsers)
+        viewModel = UserListViewModel(getAllUsers, deleteUser)
         viewModel.viewState.observeForever(mockObserver)
     }
 
@@ -71,4 +73,40 @@ class UserListViewModelTest {
         verify { mockObserver.onChanged(UserListViewState.Loading) }
     }
 
+    @Test
+    fun `delete user should lead to withData state on success`() {
+        val id = UserMother.user.id
+        val users = givenAListWithUsersAfterSuccessfullyDeletion(id)
+        viewModel.deleteUserWithId(id)
+        assert(viewModel.viewState.value == UserListViewState.WithData(users))
+    }
+
+    private fun givenAListWithUsersAfterSuccessfullyDeletion(userToBeDeletedId: String): List<UserUiItem> {
+        val users = UserMother.users
+        coEvery { getAllUsers(Unit) } returns users.toRight()
+        coEvery { deleteUser(userToBeDeletedId) } returns Unit.toRight()
+        return users.map { it.toListUi() }
+    }
+
+    @Test
+    fun `delete user should lead to withData state on failure`() {
+        val id = UserMother.user.id
+        val users = givenAListWithUsersAfterSuccessfullyDeletion(id)
+        viewModel.deleteUserWithId(id)
+        assert(viewModel.viewState.value == UserListViewState.WithData(users))
+    }
+
+    private fun givenAListWithUsersAfterFailureDeletion(userToBeDeletedId: String): List<UserUiItem> {
+        val users = UserMother.users
+        coEvery { getAllUsers(Unit) } returns users.toRight()
+        coEvery { deleteUser(userToBeDeletedId) } returns Failure.Network("").toLeft()
+        return users.map { it.toListUi() }
+    }
+
+    @Test
+    fun `loading state is setted while deleting a user`() {
+        val userId = UserMother.user.id
+        viewModel.deleteUserWithId(userId)
+        verify { mockObserver.onChanged(UserListViewState.Loading) }
+    }
 }

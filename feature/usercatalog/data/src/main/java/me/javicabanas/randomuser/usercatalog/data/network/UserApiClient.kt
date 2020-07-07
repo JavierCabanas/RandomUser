@@ -27,7 +27,6 @@ class UserApiClient(private val userService: UserService) : UserNetworkDataSourc
     override fun deleteUser(userId: String): Either<Failure, Unit> = apiCall {
         userService.deleteUser(userId).execute().map { Unit }
     }
-
 }
 
 interface UserService {

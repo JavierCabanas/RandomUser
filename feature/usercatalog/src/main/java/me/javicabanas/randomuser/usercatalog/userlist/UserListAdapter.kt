@@ -15,6 +15,7 @@ typealias ClickCallback = (String) -> Unit
 
 class UserListAdapter : RecyclerView.Adapter<UserListAdapter.UserViewHolder>(),
     AutoUpdatableAdapter {
+    var onDeleteButtonClick: ClickCallback? = null
     var onItemClick: ClickCallback? = null
     var items: List<UserUiItem> by Delegates.observable(emptyList()) { _, oldList, newList ->
         autoNotify(oldList, newList) { oldItem, newItem -> oldItem.id == newItem.id }
@@ -36,6 +37,7 @@ class UserListAdapter : RecyclerView.Adapter<UserListAdapter.UserViewHolder>(),
                 backgroundImage.setImageUrl(user.background)
                 avatar.setCircularImageUrl(user.avatar)
                 this.setOnClickListener { onItemClick?.invoke(user.id) }
+                deleteUserButton.setOnClickListener { onDeleteButtonClick?.invoke(user.id) }
             }
         }
     }
